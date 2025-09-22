@@ -45,6 +45,11 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
+	@Operation(summary = "Get product by Id", description = "Returns a product by id")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved product"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
 		Optional<Product> product = service.findById(id);
 		if (product.isPresent()) {
